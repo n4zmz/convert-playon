@@ -24,6 +24,10 @@ def single_chapter (full_fn,fn,duration):
     exists = os.path.exists(dir_fn)
     if not exists:
         print('process')
+        process = subprocess.Popen(['ffmpeg','-ss',str(startSkipSeconds),'-i',full_fn,'-t',str(tot_dur),'-c','copy',dir_fn],stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out, err = process.communicate()
+        print('out',out)
+        print('err',err)
     return
 
 def main ( argv = None):
