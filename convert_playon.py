@@ -45,6 +45,10 @@ def main ( argv = None):
             os.makedirs(destdir)
         for file in files:
             full_fn = os.path.join(root,file)
+            dir_fn = outputFolder + full_fn[len(inputFolder):]
+            o_exists = os.path.exists(dir_fn)
+            if o_exists:
+                continue
             print full_fn
             process = subprocess.Popen(['ffprobe',full_fn,'-show_chapters','-print_format','json'],stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             out, err = process.communicate()
